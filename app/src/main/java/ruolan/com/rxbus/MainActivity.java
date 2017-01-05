@@ -63,12 +63,18 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    /**
+     * 注意  如果是查找NavigationView中的headLayout里面的view的话，
+     * 使用navigationView.getHeaderView(0).findViewById来查找
+     * @param navigationView
+     */
     private void initView(NavigationView navigationView) {
         mIvAvator = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.iv_avator);
         mTvName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tv_name);
         mTvEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tv_email);
         mLlLogin = (LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.ll_login);
 
+        /*注册订阅RxBus事件*/
         subscribeEvent();
     }
 
@@ -78,12 +84,17 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
             }
         });
     }
 
     private Subscription mRxSub;
 
+    /**
+     * 接受到事件并做相关处理
+     */
     private void subscribeEvent(){
         RxSubscriptions.remove(mRxSub);
         mRxSub = RxBus.getDefault().toObservable(UserEvent.class)
@@ -175,5 +186,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxSubscriptions.remove(mRxSub);  //解除订阅  防止内存泄漏
     }
 }
