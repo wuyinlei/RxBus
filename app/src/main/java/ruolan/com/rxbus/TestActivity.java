@@ -60,7 +60,7 @@ public class TestActivity extends AppCompatActivity {
      */
     public void subscribeStickyEvent(){
         if (mRxStickySub != null && !mRxStickySub.isUnsubscribed()){
-            RxSubscriptions.remove(mRxStickySub);
+            RxSubscriptions.remove(mRxStickySub);  //移除
         } else {
             TestEvent testEvent = RxBus.getDefault().getStickyEvent(TestEvent.class);
 
