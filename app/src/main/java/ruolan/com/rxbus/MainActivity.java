@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import ruolan.com.rxbus.event.TestEvent;
+import ruolan.com.rxbus.event.UserEvent;
 import ruolan.com.rxbus.helper.RxSubscriptions;
 import ruolan.com.rxbus.rxbus.RxBus;
 import ruolan.com.rxbus.rxbus.RxBusSubscriber;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity
     private ImageView mIvAvator;
     private TextView mTvName,mTvEmail;
     private LinearLayout mLlLogin;
+
+    private TextView mTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,7 @@ public class MainActivity extends AppCompatActivity
         mTvName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tv_name);
         mTvEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tv_email);
         mLlLogin = (LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.ll_login);
+        mTest = (TextView) findViewById(R.id.test);
 
         /*注册订阅RxBus事件*/
         subscribeEvent();
@@ -86,6 +91,15 @@ public class MainActivity extends AppCompatActivity
                 startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+
+        mTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RxBus.getDefault().post(new TestEvent("Normal Ceshi"));
+                RxBus.getDefault().postSticky(new TestEvent("Sticky Ceshi"));
+                startActivity(new Intent(MainActivity.this,TestActivity.class));
             }
         });
     }

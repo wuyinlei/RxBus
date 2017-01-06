@@ -8,4 +8,5 @@
     <string name="hint_password">请输入密码</string>
     <string name="hint_name">请输入手机号</string>
     <string name="login">登录</string>
+    <string name="ceshi">测试在未注册之前发射事件，看看一般的RxBus是否可以接收到，还是要走粘性事件才能接收到。(例子可能不是那么友好，但是这里只是测试)</string>
 </resources>

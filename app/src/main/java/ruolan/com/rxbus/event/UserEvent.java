@@ -1,4 +1,4 @@
-package ruolan.com.rxbus;
+package ruolan.com.rxbus.event;
 
 import ruolan.com.rxbus.bean.User;
 

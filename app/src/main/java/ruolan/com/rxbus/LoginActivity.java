@@ -19,6 +19,7 @@ import com.lzy.okrx.RxAdapter;
 
 import ruolan.com.rxbus.bean.User;
 import ruolan.com.rxbus.constant.HttpUrlControl;
+import ruolan.com.rxbus.event.UserEvent;
 import ruolan.com.rxbus.rxbus.RxBus;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
